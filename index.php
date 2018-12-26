@@ -4,54 +4,50 @@
 	<title>Farmed</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="_css/mode-1.css">
-	<script type="text/javascript" src="../_js/cycle.js"></script>
-	<script type="text/javascript" src="../_js/jquery.js"></script>
-<script type="text/javascript">// <![CDATA[
-var imageCount = 0;
-var currentImage = 0;
-var images = new Array();
- 
-images[0] = '_imagens/Tela-1.jpg';
-images[1] = '_imagens/Tela-2.jpg';
-
- 
-var preLoadImages = new Array();
-for (var i = 0; i < images.length; i++)
-{
-   if (images[i] == "")
-      break;
- 
-   preLoadImages[i] = new Image();
-   preLoadImages[i].src = images[i];
-   imageCount++;
+	<script type="text/javascript" src="_js/cycle.js"></script>
+	<script type="text/javascript" src="_js/jquery.js"></script>
+<style>
+#box{
+	position:absolute;
+	width:100%;
+	height:100%;
+	margin: 0px;
+	overflow: hidden;
+	top:0px;
+	left:0px;
+	z-index:-1;
 }
- 
-function startSlideShow()
-{
-   if (document.body && imageCount > 0)
-   {
+</style>
+<script type="text/javascript">
+	var id = 0;
+var imgs = new Array();
+imgs[0] = "_imagens/Tela-1.jpg";
+imgs[1] = "_imagens/Tela-2.jpg";
+imgs[2] = "_imagens/Tela-3.jpg";
 
-      document.body.style.backgroundImage = "url("+images[currentImage]+")";    
-      document.body.style.backgroundAttachment = "fixed";
-      document.body.style.backgroundRepeat = "repeat";
-      document.body.style.backgroundPosition = "left top";
- 
-      currentImage = currentImage + 1;
-      if (currentImage > (imageCount-1))
-      { 
-         currentImage = 0;
-      }
-      setTimeout('startSlideShow()', 3000);
-   }
+//Aqui apenas adicione mais imagens
+function troca(){
+	if (id<imgs.length-1){
+	id++;	
+	}else{
+		id=0
+	}
+	$("#box").fadeOut(600);
+	setTimeout("$('#box').html('<img src=\""+imgs[id]+"\" width=\"100%\" height=\"100%\" />');$('#box').fadeIn(500);",500);
 }
-startSlideShow();
+var segundos = 5; //Segundos entre cada imagem
+setInterval("troca();",segundos*1000);
 </script>
+</script>
+<script src="jquery.js"></script>
 
 </head>
+
+<body >
+<div id="box"><img src="_imagens/Tela-1.jpg" width="100%" height="100%" /></div>
 <audio src="_som/index.mp3" autoplay loop>
 </audio>
-<body onLoad="startSlideShow()">
-
+<section class="fadeIn">
 <?php
 include "obj-menu.php";
 ?>
@@ -65,7 +61,7 @@ include "obj-menu.php";
 <input type="submit" name="Entrar" value=" Entrar " >
 </form>
 </div>
-
+</section>
 
 
 
