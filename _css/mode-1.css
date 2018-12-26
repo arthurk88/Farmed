@@ -7,6 +7,7 @@ body {
 	/*background-image: url("../_imagens/Tela-1.jpg");*/
     background-repeat: no-repeat;
     background-size: cover;
+    transition: background-image 3000ms;
 }
 #geral{
 	display: flex;

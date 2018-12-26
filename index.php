@@ -6,35 +6,51 @@
 	<link rel="stylesheet" type="text/css" href="_css/mode-1.css">
 	<script type="text/javascript" src="../_js/cycle.js"></script>
 	<script type="text/javascript" src="../_js/jquery.js"></script>
-<script language="Javascript">
-function skin1()
-{
-document.bgColor='red';
-}
-function skin2()
-{
-document.bgColor='green';
-}
-function skin3()
-{
-document.bgColor='yellow';
-}
-function skin4()
-{
-document.bgColor='#FFFFCC';
-}
+<script type="text/javascript">// <![CDATA[
+var imageCount = 0;
+var currentImage = 0;
+var images = new Array();
+ 
+images[0] = '_imagens/Tela-1.jpg';
+images[1] = '_imagens/Tela-2.jpg';
 
+ 
+var preLoadImages = new Array();
+for (var i = 0; i < images.length; i++)
+{
+   if (images[i] == "")
+      break;
+ 
+   preLoadImages[i] = new Image();
+   preLoadImages[i].src = images[i];
+   imageCount++;
+}
+ 
+function startSlideShow()
+{
+   if (document.body && imageCount > 0)
+   {
+
+      document.body.style.backgroundImage = "url("+images[currentImage]+")";    
+      document.body.style.backgroundAttachment = "fixed";
+      document.body.style.backgroundRepeat = "repeat";
+      document.body.style.backgroundPosition = "left top";
+ 
+      currentImage = currentImage + 1;
+      if (currentImage > (imageCount-1))
+      { 
+         currentImage = 0;
+      }
+      setTimeout('startSlideShow()', 3000);
+   }
+}
+startSlideShow();
 </script>
 
 </head>
-
-<body>
-<form name="cores">
-<input type="radio" name="campo" onclick="skin1();">Fundo vermelho<br>
-<input type="radio" name="campo" onclick="skin2();">Fundo verde<br>
-<input type="radio" name="campo" onclick="skin3();">Fundo amarelo<br>
-<input type="radio" name="campo" onclick="skin4();">Fundo amarelo<br>
-</form>
+<audio src="_som/index.mp3" autoplay loop>
+</audio>
+<body onLoad="startSlideShow()">
 
 <?php
 include "obj-menu.php";
